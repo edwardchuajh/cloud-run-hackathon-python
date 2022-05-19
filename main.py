@@ -28,6 +28,7 @@ downMoves = ['T', 'R', 'R', 'T']
 
 currentMove = 0
 currentCycle = 0
+prevMove = ""
 
 @app.route("/", methods=['GET'])
 def index():
@@ -36,14 +37,15 @@ def index():
 @app.route("/", methods=['POST'])
 def move():
     global currentMove
+    global prevMove
     request.get_data()
     logger.info(request.json)
     reqdata = request.json
 
     arenaSize = reqdata["arena"]["dims"]
     state = reqdata["arena"]["state"]
-    myLocX = state["https://cloud-run-hackathon-python-txm7l5koaq-uc.a.run.app"]["x"]
-    myLocY = state["https://cloud-run-hackathon-python-txm7l5koaq-uc.a.run.app"]["y"]
+    myLocX = int(state["https://cloud-run-hackathon-python-txm7l5koaq-uc.a.run.app"]["x"])
+    myLocY = int(state["https://cloud-run-hackathon-python-txm7l5koaq-uc.a.run.app"]["y"])
     myDirection = state["https://cloud-run-hackathon-python-txm7l5koaq-uc.a.run.app"]["direction"]
 
     midCol = 4
@@ -58,19 +60,19 @@ def move():
         return "F"
 
     # If at mid
+    if myDirection == "E" and prevMove != "T":
+        prevMove = "T"
+        return "T"
+    else:
+        return "R"
+        if myDirection == "E" and prevMove != "T":
+        prevMove = "T"
+        return "T"
+    else:
+        return "R"
     if myDirection != "E" or myDirection != "W":
         return "R"
-    else if currentMove == 1: 
-        currentMove += 1
-        return "T"
-    
 
-
-
-
-    
-
-    
     return moves[currentMove]
 
 if __name__ == "__main__":

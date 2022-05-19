@@ -22,7 +22,7 @@ logging.basicConfig(level=os.environ.get("LOGLEVEL", "INFO"))
 logger = logging.getLogger(__name__)
 
 app = Flask(__name__)
-moves = ['F', 'T', 'L', 'R']
+moves = ['F', 'R']
 
 currentMove = 0
 
@@ -36,7 +36,7 @@ def move():
     logger.info(request.json)
     global currentMove
     currentMove = currentMove + 1
-    if currentMove == 4:
+    if currentMove == 2:
         currentMove = 0
     return moves[currentMove]
 

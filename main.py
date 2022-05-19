@@ -35,7 +35,8 @@ def move():
     request.get_data()
     logger.info(request.json)
     currentMove += 1
-    currentMove %= 4
+    if currentMove == 4:
+        currentMove = 0
     return moves[currentMove]
 
 if __name__ == "__main__":

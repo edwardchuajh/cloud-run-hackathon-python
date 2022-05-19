@@ -14,6 +14,7 @@
 # limitations under the License.
 
 import os
+import json
 import logging
 import random
 from flask import Flask, request
@@ -34,10 +35,10 @@ def index():
 def move():
     request.get_data()
     logger.info(request.json)
-    global currentMove
-    currentMove = currentMove + 1
-    if currentMove == 2:
-        currentMove = 0
+    arena = json.loads(request.json)
+
+    logger.info(arena["dims"][0])
+    
     return moves[currentMove]
 
 if __name__ == "__main__":

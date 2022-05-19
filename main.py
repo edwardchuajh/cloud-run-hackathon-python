@@ -24,6 +24,7 @@ logger = logging.getLogger(__name__)
 
 app = Flask(__name__)
 moves = ['T', 'F']
+downMoves = ['T', 'R', 'R', 'T']
 
 currentMove = 0
 currentCycle = 0
@@ -34,6 +35,7 @@ def index():
 
 @app.route("/", methods=['POST'])
 def move():
+    global currentMove
     request.get_data()
     logger.info(request.json)
     reqdata = request.json
@@ -47,19 +49,27 @@ def move():
     midCol = 4
 
     if myLocX < midCol:
-        if != "E":
+        if myDirection != "E":
             return "R"
         return "F"
     if myLocX > midCol:
-        if != "W":
+        if myDirection != "W":
             return "L"
         return "F"
 
+    # If at mid
+    if myDirection != "E" or myDirection != "W":
+        return "R"
+    else if currentMove == 1: 
+        currentMove += 1
+        return "T"
     
-    global currentMove
-    currentMove += 1
-    if currentMove == 2:
-        currentMove = 0
+
+
+
+
+    
+
     
     return moves[currentMove]
 

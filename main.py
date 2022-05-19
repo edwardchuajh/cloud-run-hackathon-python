@@ -24,6 +24,8 @@ logger = logging.getLogger(__name__)
 app = Flask(__name__)
 moves = ['F', 'T', 'L', 'R']
 
+currentMove = 0
+
 @app.route("/", methods=['GET'])
 def index():
     return "Let the battle begin!"
@@ -32,7 +34,9 @@ def index():
 def move():
     request.get_data()
     logger.info(request.json)
-    return moves[1]
+    currentMove += 1
+    currentMove %= 4
+    return moves[currentMove]
 
 if __name__ == "__main__":
   app.run(debug=False,host='0.0.0.0',port=int(os.environ.get('PORT', 8080)))

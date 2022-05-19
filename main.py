@@ -37,7 +37,7 @@ def move():
     logger.info(request.json)
     arena = json.loads(request.json)
 
-    logger.info(arena["dims"][0])
+    logger.info(arena["arena"]["dims"][0])
     
     return moves[currentMove]
 

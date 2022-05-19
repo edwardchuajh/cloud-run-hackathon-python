@@ -34,6 +34,7 @@ def index():
 def move():
     request.get_data()
     logger.info(request.json)
+    global currentMove
     currentMove = currentMove + 1
     if currentMove == 4:
         currentMove = 0

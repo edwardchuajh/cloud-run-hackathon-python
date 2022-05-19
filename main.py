@@ -37,7 +37,7 @@ def move():
     logger.info(request.json)
     reqdata = json.loads(request.json)
 
-    logger.info(reqdata.arena.dims[0])
+    print(reqdata.arena.dims)
     
     return moves[currentMove]
 

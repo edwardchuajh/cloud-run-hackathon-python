@@ -40,7 +40,7 @@ def move():
     reqdata = request.json
 
     arenaSize = reqdata["arena"]["dims"]
-    state = reqdata["arena"]["state"]
+    state = reqdata["arena"]["state"]["https://cloud-run-hackathon-python-txm7l5koaq-uc.a.run.app"]
     print(state)
 
     currentMove += 1

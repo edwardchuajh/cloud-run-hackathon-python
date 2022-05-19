@@ -23,7 +23,7 @@ logging.basicConfig(level=os.environ.get("LOGLEVEL", "INFO"))
 logger = logging.getLogger(__name__)
 
 app = Flask(__name__)
-moves = ['T', 'R']
+moves = ['T', 'R', 'F']
 
 currentMove = 0
 
@@ -37,7 +37,12 @@ def move():
     logger.info(request.json)
     reqdata = request.json
 
-    print(reqdata.arena.dims)
+    print(reqdata["arena"]["dims"])
+
+    global currentMove
+    currentMove += 1
+    if currentMove == 4:
+        currentMove = 0
     
     return moves[currentMove]
 

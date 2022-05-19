@@ -40,6 +40,8 @@ def move():
     reqdata = request.json
 
     arenaSize = reqdata["arena"]["dims"]
+    state = reqdata["arena"]["state"]
+    print(state)
 
     currentMove += 1
     if currentMove == len(moves):

@@ -35,7 +35,7 @@ def index():
 def move():
     request.get_data()
     logger.info(request.json)
-    reqdata = json.loads(request.json)
+    reqdata = request.json
 
     print(reqdata.arena.dims)
     

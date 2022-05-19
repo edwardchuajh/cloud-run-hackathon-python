@@ -23,9 +23,10 @@ logging.basicConfig(level=os.environ.get("LOGLEVEL", "INFO"))
 logger = logging.getLogger(__name__)
 
 app = Flask(__name__)
-moves = ['T', 'R', 'F']
+moves = ['T', 'F']
 
 currentMove = 0
+currentCycle = 0
 
 @app.route("/", methods=['GET'])
 def index():
@@ -37,11 +38,27 @@ def move():
     logger.info(request.json)
     reqdata = request.json
 
-    print(reqdata["arena"]["dims"])
+    arenaSize = reqdata["arena"]["dims"]
+    state = reqdata["arena"]["state"]
+    myLocX = state["https://cloud-run-hackathon-python-txm7l5koaq-uc.a.run.app"]["x"]
+    myLocY = state["https://cloud-run-hackathon-python-txm7l5koaq-uc.a.run.app"]["y"]
+    myDirection = state["https://cloud-run-hackathon-python-txm7l5koaq-uc.a.run.app"]["direction"]
 
+    midCol = 4
+
+    if myLocX < midCol:
+        if != "E":
+            return "R"
+        return "F"
+    if myLocX > midCol:
+        if != "W":
+            return "L"
+        return "F"
+
+    
     global currentMove
     currentMove += 1
-    if currentMove == 4:
+    if currentMove == 2:
         currentMove = 0
     
     return moves[currentMove]
